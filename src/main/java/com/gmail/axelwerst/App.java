@@ -16,4 +16,3 @@ public class App {
         System.out.println("Сума чисел: " + sum);
     }
 }
-
