@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WordUtilsTest {
     @Test
@@ -15,7 +19,7 @@ class WordUtilsTest {
         String shortestWord = WordUtils.getShortestWord(words);
 
         // Then
-        Assertions.assertEquals("dog", shortestWord);
+        assertEquals("dog", shortestWord);
     }
 
     @Test
@@ -34,5 +38,26 @@ class WordUtilsTest {
 
         // When & Then
         Assertions.assertThrows(IllegalArgumentException.class, () -> WordUtils.getShortestWord(words));
+    }
+    @Test
+    public void testCountWordOccurrences() {
+        String sentence = "Hello world! Hello again, world.";
+        Map<String, Integer> result = WordUtils.countWordOccurrences(sentence);
+        assertEquals(2, result.get("hello"));
+        assertEquals(2, result.get("world"));
+        assertEquals(1, result.get("again"));
+    }
+
+    @Test
+    public void testEmptySentence() {
+        String sentence = "";
+        Map<String, Integer> result = WordUtils.countWordOccurrences(sentence);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testNullSentence() {
+        Map<String, Integer> result = WordUtils.countWordOccurrences(null);
+        assertTrue(result.isEmpty());
     }
 }
